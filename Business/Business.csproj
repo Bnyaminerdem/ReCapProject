@@ -11,4 +11,12 @@
     <ProjectReference Include="..\Entities\Entities.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EditorConfigFiles Remove="C:\Users\Yasir\source\repos\ReCapProject\Business\Abstract\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="C:\Users\Yasir\source\repos\ReCapProject\Business\Abstract\.editorconfig" />
+  </ItemGroup>
+
 </Project>
