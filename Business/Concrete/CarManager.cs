@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,8 +17,7 @@ namespace Business.Concrete
         public CarManager(ICarDal carDal)
         {
             _carDal = carDal;
-        }
-
+        }    
         public void AddCar(Car car)
         {
             if (car.CarName.Length < 2)
@@ -25,7 +25,6 @@ namespace Business.Concrete
                 throw new Exception("Araba ismi minimum 2 karakter olmalıdır.");
                 return;
             }
-
             if (car.DailyPrice <= 0)
             {
                 throw new Exception("Araba günlük fiyatı 0'dan büyük olmalıdır.");
@@ -40,24 +39,28 @@ namespace Business.Concrete
             _carDal.Delete(car);
         }
 
-        public List<Car> GetAllCars()
+        public List<Car> GetAll()
         {
-            return _carDal.GetAllCars();
+            return _carDal.GetAll();
         }
 
-        public Car GetCarById(int id)
+        public Car GetById(int id)
         {
-            return _carDal.Get(c => c.Id == id);
+           return _carDal.Get(c => c.CarId == id);
         }
 
+        public List<CarDetailDto> GetCarDetails()
+        {
+            return _carDal.GetCarDetails();
+        }
         public List<Car> GetCarsByBrandId(int brandId)
         {
-            return _carDal.GetAllCars(c => c.BrandId == brandId);
+            return _carDal.GetAll(c => c.BrandId == brandId);
         }
 
         public List<Car> GetCarsByColorId(int colorId)
         {
-           return _carDal.GetAllCars(c => c.ColorId == colorId);
+           return _carDal.GetAll(c => c.ColorId == colorId);
         }
 
         public void UpdateCar(Car car)

@@ -1,5 +1,6 @@
 ﻿using DataAccess.Abstract;
 using Entities.Concrete;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,27 +14,49 @@ namespace DataAccess.Concrete.EntityFrameWork
     {
         public void Add(Brand entity)
         {
-            throw new NotImplementedException();
+            using (ReCapDBContext context = new ReCapDBContext())
+            {
+                var addedEntity = context.Entry(entity);
+                addedEntity.State = EntityState.Added;
+                context.SaveChanges();
+            }
+
         }
 
         public void Delete(Brand entity)
         {
-            throw new NotImplementedException();
+            using (ReCapDBContext context = new ReCapDBContext())
+            {
+                var deletedEntity = context.Entry(entity);
+                deletedEntity.State = EntityState.Deleted;
+                context.SaveChanges();
+            }
         }
 
         public Brand Get(Expression<Func<Brand, bool>> filter)
         {
-            throw new NotImplementedException();
+            using (ReCapDBContext context = new ReCapDBContext())
+            {
+                return context.Set<Brand>().SingleOrDefault(filter);
+            }
         }
 
-        public List<Brand> GetAllCars(Expression<Func<Brand, bool>> filter = null)
+        public List<Brand> GetAll(Expression<Func<Brand, bool>> filter = null)
         {
-            throw new NotImplementedException();
+            using (ReCapDBContext context = new ReCapDBContext())
+            {
+                return filter == null ? context.Set<Brand>().ToList() : context.Set<Brand>().Where(filter).ToList();
+            }
         }
 
         public void Update(Brand entity)
         {
-            throw new NotImplementedException();
+            using (ReCapDBContext context = new ReCapDBContext())
+            {
+                var updatedEntity = context.Entry(entity);
+                updatedEntity.State = EntityState.Modified;
+                context.SaveChanges();
+            }
         }
     }
 }

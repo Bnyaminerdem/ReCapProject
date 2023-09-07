@@ -1,5 +1,6 @@
 ﻿using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,17 +16,17 @@ namespace DataAccess.Concrete.InMemory
 
         public InMemoryCarDal()
         {
-            _cars = new List<Car>
-            {
-                new Car {Id =1, BrandId = 2, ColorId =3, ModelYear = 2023, DailyPrice = 500,Description = " : Sports Car" },
-                new Car {Id =4, BrandId = 5, ColorId = 6, ModelYear = 2022, DailyPrice = 700,Description = " : Luxury Car" },
-                new Car {Id =7, BrandId = 8, ColorId = 9, ModelYear = 2019, DailyPrice = 250,Description = " : Economic Car" },
-            };
+            //_cars = new List<Car>
+            //{
+            //    new Car {CarId =1, BrandId = 2, ColorId =3, ModelYear = 2023, DailyPrice = 500,Description = " : Sports Car" },
+            //    new Car {CarId =4, BrandId = 5, ColorId = 6, ModelYear = 2022, DailyPrice = 700,Description = " : Luxury Car" },
+            //    new Car {CarId =7, BrandId = 8, ColorId = 9, ModelYear = 2019, DailyPrice = 250,Description = " : Economic Car" },
+            //};
         }
         public List<Car> GetAll() { return _cars; }
         public Car GetById(int id)
         {
-            Car car = _cars.FirstOrDefault(c => c.Id == id);
+            Car car = _cars.FirstOrDefault(c => c.CarId == id);
             return car;
         }
         public void Add(Car car)
@@ -34,7 +35,7 @@ namespace DataAccess.Concrete.InMemory
         }
         public void Update(Car car)
         {
-            Car carToUpdate = _cars.FirstOrDefault(c => c.Id == car.Id);
+            Car carToUpdate = _cars.FirstOrDefault(c => c.CarId == car.CarId);
             if (carToUpdate != null)
             {
                 carToUpdate.BrandId = car.BrandId;
@@ -46,7 +47,7 @@ namespace DataAccess.Concrete.InMemory
         }
         public void Delete(int id)
         {
-            Car carToDelete = _cars.FirstOrDefault(c => c.Id == id);
+            Car carToDelete = _cars.FirstOrDefault(c => c.CarId == id);
             if (carToDelete != null)
             {
                 _cars.Remove(carToDelete);
@@ -69,6 +70,16 @@ namespace DataAccess.Concrete.InMemory
         }
 
         public List<Car> GetAllCars()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<CarDetailDto> GetCarDetails()
         {
             throw new NotImplementedException();
         }

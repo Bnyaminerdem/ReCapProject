@@ -42,7 +42,7 @@ namespace DataAccess.Concrete.EntityFrameWork
             }
         }
 
-        public List<Color> GetAllCars(Expression<Func<Color, bool>> filter = null)
+        public List<Color> GetAll(Expression<Func<Color, bool>> filter = null)
         {
             using (ReCapDBContext context = new ReCapDBContext())
             {
