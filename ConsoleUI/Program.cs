@@ -6,6 +6,7 @@ using DataAccess.Concrete.EntityFrameWork;
 using Entities.Concrete;
 using Microsoft.EntityFrameworkCore.Update.Internal;
 using Microsoft.IdentityModel.Protocols;
+using NPoco;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,56 +21,24 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            //CarTest();
-            //ColorTest();
-            //BrandTest();          
+            CarTest();                 
         }
         private static void CarTest()
         {
             CarManager carManager = new CarManager(new EfCarDal());
-            //foreach (var car in carManager.GetCarDetails())
-            //{
-            //    Console.WriteLine(car.CarName + "/" + car.ColorName);
-            //}
-            //Car carTest = carManager.GetById(1);
-            //Console.WriteLine(carTest.CarName + "/" + carTest.CarId);
-            //Car carTest = new Car();
-            //carTest.CarName = "testcar";
-            //carTest.CarId = 7;
-            //carTest.BrandId = 7;
-            //carTest.ModelYear = 2015;
-            //carTest.ColorId = 7;
-            //carTest.DailyPrice = 1000;
-            //carTest.Description = "suv";
-            //carManager.AddCar(carTest);
-            //carManager.DeleteCar(carTest);
 
-
-            //foreach (var car in carManager.GetAll())
-            //{
-            //    Console.WriteLine(car.CarName);
-            //}
-
-        }
-        private static void ColorTest() 
-        {
-            ColorManager colorManager = new ColorManager(new EfColorDal());
-            //foreach (var color in colorManager.GetAll())
-            //{
-            //    Console.WriteLine(color.ColorName + "/" + color.ColorId);
-            //}
-            //Color colorTest = colorManager.GetById(1);
-            //Console.WriteLine(colorTest.ColorName + "/" + colorTest.ColorId);         
-        }
-        private static void BrandTest()
-        {
-            BrandManager brandManager = new BrandManager(new EfBrandDal());
-            //foreach ( var brand in brandManager.GetAll())
-            //{
-            //    Console.WriteLine(brand.BrandName +"/"+ brand.BrandId);
-            //}
-            //Brand brandTest = brandManager.GetById(1);
-            //Console.WriteLine(brandTest.BrandName + "/" + brandTest.BrandId);
+            var result =carManager.GetCarDetails();
+            if (result.Success)               
+            {
+                foreach (var car in result.Data)
+                {
+                    Console.WriteLine(car.CarName + "/" + car.ColorName);
+                }
+            }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
         }
     }
 }
