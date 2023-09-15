@@ -25,7 +25,7 @@ namespace DataAccess.Concrete.InMemory
         public List<Car> GetAll() { return _cars; }
         public Car GetById(int id)
         {
-            Car car = _cars.FirstOrDefault(c => c.CarId == id);
+            Car car = _cars.FirstOrDefault(c => c.Id == id);
             return car;
         }
         public void Add(Car car)
@@ -34,7 +34,7 @@ namespace DataAccess.Concrete.InMemory
         }
         public void Update(Car car)
         {
-            Car carToUpdate = _cars.FirstOrDefault(c => c.CarId == car.CarId);
+            Car carToUpdate = _cars.FirstOrDefault(c => c.Id == car.Id);
             if (carToUpdate != null)
             {
                 carToUpdate.BrandId = car.BrandId;
@@ -46,7 +46,7 @@ namespace DataAccess.Concrete.InMemory
         }
         public void Delete(int id)
         {
-            Car carToDelete = _cars.FirstOrDefault(c => c.CarId == id);
+            Car carToDelete = _cars.FirstOrDefault(c => c.Id == id);
             if (carToDelete != null)
             {
                 _cars.Remove(carToDelete);

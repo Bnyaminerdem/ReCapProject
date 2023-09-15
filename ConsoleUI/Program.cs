@@ -21,14 +21,15 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            CarTest();                 
+            //DeleteCarTest();
+            UserTest();
         }
         private static void CarTest()
         {
             CarManager carManager = new CarManager(new EfCarDal());
 
-            var result =carManager.GetCarDetails();
-            if (result.Success)               
+            var result = carManager.GetCarDetails();
+            if (result.Success)
             {
                 foreach (var car in result.Data)
                 {
@@ -39,6 +40,28 @@ namespace ConsoleUI
             {
                 Console.WriteLine(result.Message);
             }
+        }
+        private static void UserTest()
+        {
+            UserManager userManager = new UserManager(new EfUserDal());
+
+            User user1 = new User
+            {
+                Id = 1,
+                FirstName = "Bünyamin",
+                LastName = "Çiftçi",
+                Email = "berdem@gmail.com",
+                Password = "berdem123*"
+            };    
+
+            userManager.Add(user1);
+        }
+        private static void DeleteCarTest()
+        {
+            CarManager carManager = new CarManager(new EfCarDal());
+            var carDelet = carManager.GetById(9);
+            carManager.DeleteCar(carDelet.Data);
+            Console.WriteLine(carDelet.Message);
         }
     }
 }
