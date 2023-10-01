@@ -60,7 +60,7 @@ namespace ConsoleUI
         {
             CarManager carManager = new CarManager(new EfCarDal());
             var carDelet = carManager.GetById(9);
-            carManager.DeleteCar(carDelet.Data);
+            carManager.Delete(carDelet.Data);
             Console.WriteLine(carDelet.Message);
         }
     }
