@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Abstract;
 using Core.Utilities.Concrete;
 using DataAccess.Abstract;
@@ -19,8 +21,8 @@ namespace Business.Concrete
         public ColorManager(IColorDal colorDal)
         {
             _colorDal = colorDal;
-        }
-
+        }    
+        [ValidationAspect(typeof(ColorValidator))]
         public IResult Add(Color color)
         {
             _colorDal.Add(color);
@@ -43,6 +45,7 @@ namespace Business.Concrete
             return new SuccessDataResult<Color>(_colorDal.Get(c => c.Id == Id));
         }
 
+        [ValidationAspect(typeof(ColorValidator))]
         public IResult Update(Color color)
         {
             _colorDal.Update(color);
