@@ -13,9 +13,9 @@
   <ItemGroup>
     <PackageReference Include="Abp" Version="8.4.0" />
     <PackageReference Include="EntityFramework" Version="6.4.4" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.11" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.11" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.11">
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.13" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.13" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.13">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -24,6 +24,46 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Entities\Entities.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="C:\Users\Yasir\.nuget\packages\umbraco.sqlserverce\4.0.0.1\build\..\runtimes\win-x64\native\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="C:\Users\Yasir\.nuget\packages\umbraco.sqlserverce\4.0.0.1\build\..\runtimes\win-x86\native\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="C:\Users\Yasir\.nuget\packages\umbraco.sqlserverce\4.0.0.1\build\..\runtimes\win-x86\native\sqlcese40.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="C:\Users\Yasir\.nuget\packages\umbraco.sqlserverce\4.0.0.1\build\..\runtimes\win-x86\native\sqlceqp40.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="C:\Users\Yasir\.nuget\packages\umbraco.sqlserverce\4.0.0.1\build\..\runtimes\win-x86\native\sqlceme40.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="C:\Users\Yasir\.nuget\packages\umbraco.sqlserverce\4.0.0.1\build\..\runtimes\win-x86\native\sqlceer40EN.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="C:\Users\Yasir\.nuget\packages\umbraco.sqlserverce\4.0.0.1\build\..\runtimes\win-x86\native\sqlcecompact40.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="C:\Users\Yasir\.nuget\packages\umbraco.sqlserverce\4.0.0.1\build\..\runtimes\win-x86\native\sqlceca40.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="C:\Users\Yasir\.nuget\packages\umbraco.sqlserverce\4.0.0.1\build\..\runtimes\win-x86\native\Microsoft.VC90.CRT\msvcr90.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="C:\Users\Yasir\.nuget\packages\umbraco.sqlserverce\4.0.0.1\build\..\runtimes\win-x86\native\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest" />
   </ItemGroup>
 
 </Project>

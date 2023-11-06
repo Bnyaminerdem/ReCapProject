@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concrete.EntityFrameWork
 {
-    public class EfCustomerDal: EfEntityRepositoryBase<Customer, ReCapDBContext>, ICustomerDal
-    {         
+    public class EfCarImageDal : EfEntityRepositoryBase<CarImage, ReCapDBContext>, ICarImageDal
+    {
+
     }
 }
