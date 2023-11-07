@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Utilities.Results.Abstract;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,7 +22,7 @@ namespace Core.Utilities.Results.Concrete
 
         }
 
-        public SuccessDataResult() : base(default, true)
+        public SuccessDataResult(IDataResult<Entities.Concrete.User> userToCheck) : base(default, true)
         {
 
         }

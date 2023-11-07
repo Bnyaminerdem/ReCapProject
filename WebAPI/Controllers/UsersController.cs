@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Business.Abstract;
+using Core.Utilities.Entities.Concrete;
 
 namespace WebAPI.Controllers
 {

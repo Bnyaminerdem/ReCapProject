@@ -32,9 +32,19 @@ namespace Business.Constants
         public static string CustomerUpdated = "Müşteri güncelleme işlemi başarılı";
 
         //UserMessages
-        public static string UserAdded = "Kullanıcı kayıt işlemi başarılı";
-        public static string UserDeleted = "Kullanıcı silme işlemi başarılı";
-        public static string UserUpdated = "Kullanıcı güncelleme işlemi başarılı";
+        public static string UserAdded = "Kullanıcı Eklendi";
+        public static string UserDeleted = "Kullanıcı Silindi";
+        public static string UserUpdated = "Kullanıcı Güncellendi";
+        public static string UsersListed = "Kullanıcılar Listelendi";
+        public static string UserListed = "Kullanıcı Listelendi";
+        public static string AuthorizationDenied = "yetki reddedildi";
+        public static string UserRegistered = "kayıt olundu";
+        public static string UserNotFound = "kullanıcı bulunamadı";
+        public static string PasswordError = "parola hatası";
+        public static string UserAlreadyExists = "kullanıcı zaten var";
+        public static string SuccessfulLogin = "başarılı giriş";
+        public static string AccessTokenCreated = "token oluşturuldu";
+
 
         //RentalMessages
         public static string RentalAdded = "Kiralama işlemi başarılı";
