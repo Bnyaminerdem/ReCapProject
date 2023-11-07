@@ -1,11 +1,9 @@
 using Autofac;
-using Autofac.Core;
 using Autofac.Extensions.DependencyInjection;
-using Business.Abstract;
-using Business.Concrete;
 using Business.DependencyResolvers.Autofac;
-using DataAccess.Abstract;
-using DataAccess.Concrete.EntityFrameWork;
+using Core.DependencyResolvers;
+using Core.Extensions;
+using Core.Utilities.IoC;
 using Microsoft.AspNetCore.Identity;
 
 namespace WebAPI
@@ -16,16 +14,38 @@ namespace WebAPI
         {
             var builder = WebApplication.CreateBuilder(args);
 
-           //dd services to the container.
+            // Add services to the container.
 
             builder.Services.AddControllers();
-
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwaggerGen();     
+            builder.Services.AddControllers();
 
             builder.Host.UseServiceProviderFactory(services => new AutofacServiceProviderFactory())
-                       .ConfigureContainer<ContainerBuilder>(builder => { builder.RegisterModule(new AutofacBusinessModule()); });
+                        .ConfigureContainer<ContainerBuilder>(builder => { builder.RegisterModule(new AutofacBusinessModule()); });
+
+            var tokenOptions = builder.Configuration.GetSection("TokenOptions").Get<TokenOptions>();
+
+            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidIssuer = tokenOptions.Issuer,
+                        ValidAudience = tokenOptions.Audience,
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokenOptions.SecurityKey)
+                    };
+                });
+            builder.Services.AddDependencyResolvers(new ICoreModule[]
+            {
+                new CoreModule(),
+            });
 
             var app = builder.Build();
 
@@ -36,10 +56,13 @@ namespace WebAPI
                 app.UseSwaggerUI();
             }
 
+            app.UseStaticFiles();
+
             app.UseHttpsRedirection();
 
-            app.UseAuthorization();
+            app.UseAuthentication();
 
+            app.UseAuthorization();
 
             app.MapControllers();
 
