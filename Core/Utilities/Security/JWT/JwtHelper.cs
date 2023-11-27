@@ -25,6 +25,11 @@ namespace Core.Utilities.Security.JWT
         }
         public AccessToken CreateToken(User user, List<OperationClaim> operationClaims)
         {
+            if (_tokenOptions.AccessTokenExpiration <= 0)
+            {
+                
+            }
+
             _accessTokenExpiration = DateTime.Now.AddMinutes(_tokenOptions.AccessTokenExpiration);
             var securityKey = SecurityKeyHelper.CreateSecurityKey(_tokenOptions.SecurityKey);
             var signingCredentials = SigningCredentialsHelper.CreateSigningCredentials(securityKey);
@@ -37,7 +42,6 @@ namespace Core.Utilities.Security.JWT
                 Token = token,
                 Expiration = _accessTokenExpiration
             };
-
         }
 
         public JwtSecurityToken CreateJwtSecurityToken(TokenOptions tokenOptions, User user,

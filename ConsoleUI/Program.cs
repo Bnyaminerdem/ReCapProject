@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Concrete;
+using Business.Constants;
 using Core.Utilities.Entities.Concrete;
 using DataAccess.Abstract;
 using DataAccess.Concrete;
@@ -21,7 +22,7 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-
+          
         }
     }
 }

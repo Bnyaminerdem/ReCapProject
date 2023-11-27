@@ -4,7 +4,10 @@ using Business.DependencyResolvers.Autofac;
 using Core.DependencyResolvers;
 using Core.Extensions;
 using Core.Utilities.IoC;
-using Microsoft.AspNetCore.Identity;
+using Core.Utilities.Security.Encryption;
+using Core.Utilities.Security.JWT;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 namespace WebAPI
 {

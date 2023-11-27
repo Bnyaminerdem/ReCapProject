@@ -1,6 +1,5 @@
 ﻿using Business.Abstract;
 using Business.Constants;
-using Core.Utilities;
 using Core.Utilities.Entities.Concrete;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
@@ -55,7 +54,7 @@ namespace Business.Concrete
 
         public IResult UserExists(string email)
         {
-            if (_userService.GetByMail(email).Data != null)
+            if (_userService.GetByMail(email).Data != null) 
             {
                 return new ErrorResult(Messages.UserAlreadyExists);
             }
@@ -68,5 +67,6 @@ namespace Business.Concrete
             var accessToken = _tokenHelper.CreateToken(user, claims.Data);
             return new SuccessDataResult<AccessToken>(accessToken, Messages.AccessTokenCreated);
         }
+
     }
 }

@@ -44,6 +44,7 @@ namespace Business.Constants
         public static string UserAlreadyExists = "kullanıcı zaten var";
         public static string SuccessfulLogin = "başarılı giriş";
         public static string AccessTokenCreated = "token oluşturuldu";
+        public static string UnknownError = "beklenmedik bir hata oluştu,Lütfen sonra tekrar deneyiniz";
 
 
         //RentalMessages
