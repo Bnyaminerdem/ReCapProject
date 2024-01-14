@@ -95,5 +95,10 @@ namespace Business.Concrete
             }
             return new ErrorResult();
         }
+
+        IDataResult<CarImage> ICarImageService.GetByCarId(int carId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

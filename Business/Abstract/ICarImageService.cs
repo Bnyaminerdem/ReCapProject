@@ -9,10 +9,10 @@ namespace Business.Abstract
     {
         IDataResult<List<CarImage>> GetAll();
         IDataResult<CarImage> GetByImageId(int imageId);
-        IDataResult<List<CarImage>> GetByCarId(int carId);
+        IDataResult<CarImage> GetByCarId(int carId);
         Core.Utilities.Results.Abstract.IResult Add(IFormFile file, CarImage carImage);
-        Core.Utilities.Results.Abstract.IResult Delete(CarImage carImage);
         Core.Utilities.Results.Abstract.IResult Update(IFormFile file, CarImage carImage);
+        Core.Utilities.Results.Abstract.IResult Delete(CarImage carImage);     
     }
 }
 
