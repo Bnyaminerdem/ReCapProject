@@ -40,8 +40,7 @@ namespace DataAccess.Concrete.InMemory
                 carToUpdate.BrandId = car.BrandId;
                 carToUpdate.ColorId = car.ColorId;
                 carToUpdate.ModelYear = car.ModelYear;
-                carToUpdate.DailyPrice = car.DailyPrice;
-                carToUpdate.Description = car.Description;
+                carToUpdate.DailyPrice = car.DailyPrice;                
             }
         }
         public void Delete(int id)

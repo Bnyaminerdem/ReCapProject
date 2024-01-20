@@ -2,6 +2,7 @@
 using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading;
 
 namespace WebAPI.Controllers
 {
@@ -19,6 +20,10 @@ namespace WebAPI.Controllers
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
+
+            Thread.Sleep(millisecondsTimeout:5
+                );
+
             var result = _carService.GetAll();
             if (result.Success) {return Ok(result); }
             return BadRequest();

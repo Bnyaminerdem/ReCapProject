@@ -8,6 +8,7 @@ using Core.Utilities.Security.Encryption;
 using Core.Utilities.Security.JWT;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Umbraco.Core.Composing.CompositionExtensions;
 
 namespace WebAPI
 {
@@ -25,6 +26,8 @@ namespace WebAPI
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();     
             builder.Services.AddControllers();
+
+            builder.Services.AddCors();
 
             builder.Host.UseServiceProviderFactory(services => new AutofacServiceProviderFactory())
                         .ConfigureContainer<ContainerBuilder>(builder => { builder.RegisterModule(new AutofacBusinessModule()); });
@@ -61,8 +64,10 @@ namespace WebAPI
 
             app.UseStaticFiles();
 
-            app.UseHttpsRedirection();
+            app.UseCors(builder => builder.WithOrigins("http://localhost:4200").AllowAnyHeader());
 
+            app.UseHttpsRedirection();
+            
             app.UseAuthentication();
 
             app.UseAuthorization();
