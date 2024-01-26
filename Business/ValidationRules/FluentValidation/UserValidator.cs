@@ -13,8 +13,9 @@ namespace Business.ValidationRules.FluentValidation
     {
         public UserValidator() 
         {
-            RuleFor(x => x.FirstName).NotEmpty();
-            RuleFor(x => x.LastName).NotEmpty();
+            RuleFor(u => u.FirstName).NotEmpty();
+            RuleFor(u => u.LastName).NotEmpty();
+            RuleFor(u => u.FirstName).MinimumLength(2);
         }
     }
 }

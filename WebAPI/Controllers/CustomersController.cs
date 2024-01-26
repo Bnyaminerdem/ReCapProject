@@ -21,15 +21,26 @@ namespace WebAPI.Controllers
         {
             var result = _customerService.GetAll();
             if (result.Success) { return Ok(result); }
-            return BadRequest();
+            return BadRequest(result);
         }
 
         [HttpGet("getbyid")]
         public IActionResult GetById(int id)
         {
-            var result = _customerService.GetById(id);
+            var result = _customerService.GetCustomerById(id);
             if (result.Success) { return Ok(result); }
-            return BadRequest();
+            return BadRequest(result);
+        }
+
+        [HttpGet("getbyuser")]
+        public IActionResult GetByUserId(int userId)
+        {
+            var result = _customerService.GetCustomerByUserId(userId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
         }
 
         [HttpPost("add")]
@@ -37,7 +48,7 @@ namespace WebAPI.Controllers
         {
             var result = _customerService.Add(user);
             if (result.Success) { return Ok(result); }
-            return BadRequest();
+            return BadRequest(result);
         }
 
         [HttpPost("delete")]
@@ -45,7 +56,7 @@ namespace WebAPI.Controllers
         {
             var result = _customerService.Delete(user);
             if (result.Success) { return Ok( result); }
-            return BadRequest();
+            return BadRequest(result);
         }
 
         [HttpPost("update")]
@@ -53,7 +64,7 @@ namespace WebAPI.Controllers
         {
             var result = _customerService.Delete(user);
             if (result.Success) { return Ok(result); }
-            return BadRequest();
+            return BadRequest(result);
         }
 
     }

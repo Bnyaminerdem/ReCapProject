@@ -2,6 +2,7 @@
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
+using Core.Utilities.Business;
 using Core.Utilities.Results;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
@@ -30,26 +31,24 @@ namespace Business.Concrete
         [ValidationAspect(typeof(RentalValidator))]
         public IResult Add(Rental rental)
         {
-            if (rental.ReturnDate != null)
+            if (rental.ReturnDate == null)
             {
-                _rentalDal.Add(rental);
-                return new SuccessResult(Messages.RentalAdded);
+                return new ErrorResult(Messages.RentalCarError);
             }
-            else
-            {
-                return new ErrorResult(Messages.RentalAddedError);
-            }
-        }
-        
-        public IResult CheckReturnDate(int carId)
-        {
-            var result = _rentalDal.GetRentalDetails(x => x.CarId == carId && x.ReturnDate == null);
-            if (result.Count > 0)
-            {
-                return new ErrorResult(Messages.RentalAddedError);
-            }
+            _rentalDal.Add(rental);
             return new SuccessResult(Messages.RentalAdded);
-        } 
+
+        }
+
+        public IDataResult<Rental> CheckRentalCarId(int carId)
+        {
+            var rental = _rentalDal.Get(r => r.CarId == carId && r.ReturnDate == null);
+            if (rental != null)
+            {
+                return new ErrorDataResult<Rental>("Araç müsait değil, kiralanmış durumda");
+            }
+            return new SuccessDataResult<Rental>("Araç müsait, kiralanabilir durumda");
+        }
 
         public IResult Delete(Rental rental)
         {
@@ -59,35 +58,73 @@ namespace Business.Concrete
 
         public IDataResult<List<Rental>> GetAll()
         {
-            return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll());
+            return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll(), Messages.RentalsListed);
         }
 
-        public IDataResult<Rental> GetById(int id)
+        public IDataResult<List<RentalDetailDto>> GetRentalsDetails()
         {
-            return new SuccessDataResult<Rental>(_rentalDal.Get(r => r.Id == id));
+            return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalsDetails(), Messages.RentalsListed);
         }
 
-        public IDataResult<List<RentalDetailDto>> GetRentalDetailsDto(int carId)
-        {
-            return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetails(x => x.CarId == carId));
-        }
-
+        [ValidationAspect(typeof(RentalValidator))]
         public IResult Update(Rental rental)
         {
-           _rentalDal.Update(rental);
+            _rentalDal.Update(rental);
             return new SuccessResult(Messages.RentalUpdated);
         }
-        public IResult UpdateReturnDate(int CarId)
+
+        public IResult CheckRental(Rental entity)
         {
-            var result = _rentalDal.GetAll(x => x.CarId == CarId);
-            var updatedRental = result.LastOrDefault();
-            if (updatedRental.ReturnDate != null)
+            var result = BusinessRules.Run(
+                CheckIfThisCarIsAlreadyRentedInSelectedDateRange(entity),
+                CheckIfReturnDateIsBeforeRentDate(entity.ReturnDate, entity.RentDate)
+                );
+            if (result != null)
             {
-                return new ErrorResult(Messages.RentalUpdatedReturnDateError);
+                return result;
             }
-            updatedRental.ReturnDate = DateTime.Now;
-            _rentalDal.Update(updatedRental);
-            return new SuccessResult(Messages.RentalUpdatedReturnDate);
+
+
+            return new SuccessResult("Ödeme Sayfasına Yönlendiriliyorsunuz.");
+        }
+
+        private IResult CheckIfThisCarIsAlreadyRentedInSelectedDateRange(Rental entity)
+        {
+            var result = _rentalDal.Get(r =>
+            r.CarId == entity.CarId
+            && (r.RentDate.Date == entity.RentDate.Date
+            || (r.RentDate.Date < entity.RentDate.Date
+            && (r.ReturnDate == null
+            || ((DateTime)r.ReturnDate).Date > entity.RentDate.Date))));
+
+            if (result != null)
+            {
+                return new ErrorResult(Messages.ThisCarIsAlreadyRentedInSelectedDateRange);
+            }
+            return new SuccessResult();
+
+        }
+        private IResult CheckIfThisCarHasBeenReturned(Rental entity)
+        {
+            var result = _rentalDal.Get(r => r.CarId == entity.CarId && r.ReturnDate == null);
+
+            if (result != null)
+            {
+                if (entity.ReturnDate == null || entity.ReturnDate > result.RentDate)
+                {
+                    return new ErrorResult(Messages.ThisCarIsAlreadyRentedInSelectedDateRange);
+                }
+            }
+            return new SuccessResult();
+        }
+        private IResult CheckIfReturnDateIsBeforeRentDate(DateTime? returnDate, DateTime rentDate)
+        {
+            if (returnDate != null)
+                if (returnDate < rentDate)
+                {
+                    return new ErrorResult(Messages.ThisCarIsAlreadyRentedInSelectedDateRange);
+                }
+            return new SuccessResult();
         }
     }
 }

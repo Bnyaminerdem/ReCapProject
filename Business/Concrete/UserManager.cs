@@ -3,6 +3,7 @@ using Business.Constants;
 using Core.Utilities.Entities.Concrete;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
+using Core.Utilities.Security.Hashing;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
@@ -55,9 +56,41 @@ namespace Business.Concrete
             return new SuccessResult(Messages.UserUpdated);
         }
 
+        public IDataResult<User> GetByUserId(int userId)
+        {
+            return new SuccessDataResult<User>(_userDal.Get(u => u.Id == userId));
+        }
+
+        public IResult EditProfil(User user, string password)
+        {
+            byte[] passwordHash, passwordSalt;
+            HashingHelper.CreatePasswordHash(password, out passwordHash, out passwordSalt);
+            var updatedUser = new User
+            {
+                Id = user.Id,
+                Email = user.Email,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                PasswordHash = passwordHash,
+                PasswordSalt = passwordSalt,
+                Status = user.Status
+            };
+            _userDal.Update(updatedUser);
+            return new SuccessResult(Messages.UserUpdated);
+        }
+
+        public IDataResult<User> GetUserByEmail(string email)
+        {
+            return new SuccessDataResult<User>(_userDal.Get(u => u.Email == email));
+        }
+
         public IDataResult<User> GetById(int id)
         {
-            throw new NotImplementedException();
+            if (DateTime.Now.Hour == 00)
+            {
+                return new ErrorDataResult<User>(Messages.MaintenanceTime);
+            }
+            return new SuccessDataResult<User>(_userDal.Get(b => b.Id == id));
         }
     }
 }

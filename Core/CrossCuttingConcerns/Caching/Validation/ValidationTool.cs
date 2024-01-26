@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.CrossCuttingConcerns.Validation
+namespace Core.CrossCuttingConcerns.Caching.Validation
 {
     public class ValidationTool
     {

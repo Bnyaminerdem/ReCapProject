@@ -21,8 +21,7 @@ namespace Core.Utilities.Results.Concrete
         {
 
         }
-
-        public SuccessDataResult(IDataResult<Entities.Concrete.User> userToCheck) : base(default, true)
+        public SuccessDataResult() : base(default, true)
         {
 
         }

@@ -13,29 +13,33 @@ namespace DataAccess.Concrete.EntityFrameWork
 {
     public class EfRentalDal : EfEntityRepositoryBase<Rental, ReCapDBContext>, IRentalDal
     {
-        public List<RentalDetailDto> GetRentalDetails(Expression<Func<Rental, bool>> filter = null)
+        public List<RentalDetailDto> GetRentalsDetails(Expression<Func<RentalDetailDto, bool>> filter = null)
         {
             using (ReCapDBContext context = new ReCapDBContext())
             {
-                var result = from re in filter is null ? context.Rentals : context.Rentals.Where(filter)
-                             join ca in context.Cars
-                             on re.CarId equals ca.Id
-                             join cus in context.Customers
-                             on re.CustomerId equals cus.CustomerId
-                             join us in context.Users
-                             on cus.UserId equals us.Id
+                var result = from rent in context.Rentals
+                             join car in context.Cars
+                       on rent.CarId equals car.CarId
+                             join customer in context.Customers
+                                 on rent.CustomerId equals customer.CustomerId
+                             join user in context.Users
+                                 on customer.UserId equals user.Id
+                             join brand in context.Brands
+                                 on car.BrandId equals brand.BrandId
                              select new RentalDetailDto
                              {
-                                 Id = re.Id,
-                                 CarName = ca.Name,
-                                 CustomerName = cus.CompanyName,
-                                 CarId = ca.Id,
-                                 RentDate = re.RentDate,
-                                 ReturnDate = re.ReturnDate,
-                                 UserName = us.FirstName + " " + us.LastName
+                                 RentalId = rent.RentalId,
+                                 CarId = car.CarId,
+                                 ModelFullName = $"{brand.BrandName} {car.CarName}",
+                                 CustomerId = customer.CustomerId,
+                                 CustomerFullName = $"{user.FirstName} {user.LastName}",
+                                 ReturnDate = rent.ReturnDate,
+                                 DailyPrice = car.DailyPrice,
+                                 RentDate = rent.RentDate,                                
                              };
-
-                return result.ToList();
+                return filter == null
+                    ? result.ToList()
+                    : result.Where(filter).ToList();
             }
         }
     }

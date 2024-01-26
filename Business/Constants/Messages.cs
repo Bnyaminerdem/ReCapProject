@@ -9,51 +9,57 @@ namespace Business.Constants
 {
     public static class Messages
     {
+        public static string MaintenanceTime = "Sistem Bakımda.";
+
         //Car Messages
-        public static string CarAdded = "Araç kayıt işlemi başarılı";
-        public static string CarDeleted = "Araç Silme işlemi başarılı";
-        public static string CarUpdated = "Araç Güncelleme işlemi başarılı";
+        public static string CarAdded = "Araba Eklendi";
+        public static string CarDeleted = "Araba Silindi";
+        public static string CarUpdated = "Araba Güncellendi";
+        public static string CarNameInvalid = "Araba İsmi Geçersiz";
+        public static string CarsListed = "Arabalar Listelendi";
+        public static string CarListed = "Araba Listelendi";
+        public static string CarDetailsListed = "Araba Detayları Listelendi";
+        public static string CarNotExist = "Araba mevcut degil";
 
-        //ColorMessages
-        public static string ColorAdded = "Renk kayıt işlemi başarılı";
-        public static string ColorUpdated = "Renk güncelleme işlemi başarılı";
-        public static string ColorDeleted = "Renk silme işlemi başarılı";
-        public static string ColorAddError = "Eklemek istediğiniz renk zaten mevcut.Lütfen farklı bir renk giriniz.";
+        //Brand Messages
+        public static string BrandAdded = "Marka Eklendi";
+        public static string BrandDeleted = "Marka Silindi";
+        public static string BrandUpdated = "Marka Güncellendi";
+        public static string BrandNameInvalid = "Marka İsmi geçersiz";
+        public static string BrandsListed = "Markalar Listelendi";
+        public static string BrandListed = "Marka Listelendi";
 
-        //BrandMessages
-        public static string BrandAdded = "Marka kayıt işlemi başarılı";
-        public static string BrandUpdated = "Marka güncelleme işlemi başarılı";
-        public static string BrandDeleted = "Marka silme işlemi başarılı";
-        public static string BrandAddError = "Eklemek istediğiniz marka zaten mevcut.Lütfen farklı bir marka giriniz.";
+        //Color Messages
+        public static string ColorAdded = "Renk Eklendi";
+        public static string ColorDeleted = "Renk Silindi";
+        public static string ColorUpdated = "Renk Güncellendi";
+        public static string ColorsListed = "Renkler Listelendi";
+        public static string ColorListed = "Renk Listelendi";
 
-        //CustomerMessages
-        public static string CustomerAdded = "Müşteri kayıt işlemi başarılı";
-        public static string CustomerDeleted = "Müşteri silme işlemi başarılı";
-        public static string CustomerUpdated = "Müşteri güncelleme işlemi başarılı";
+        //Rental Messages
+        public static string RentalAdded = "Kiralama Eklendi.";
+        public static string RentalDeleted = "Kiralama Silindi.";
+        public static string RentalUpdated = "Kiralama Güncellendi.";
+        public static string RentalsListed = "Kiralamalar Listelendi.";
+        public static string RentalListed = "Kiralama Listelendi.";
+        public static string RentalCarError = "Araç Kiralanamaz.";
+        public static string ThisCarIsAlreadyRentedInSelectedDateRange = "Bu araba zaten seçilen tarih aralığında kiralandı";
 
-        //UserMessages
+        //Customer Messages
+        public static string CustomerAdded = "Müşteri Eklendi";
+        public static string CustomerDeleted = "Müşteri Silindi";
+        public static string CustomerUpdated = "Müşteri Güncellendi";
+        public static string CustomersListed = "Müşteriler Listelendi";
+        public static string CustomerListed = "Müşteri Listelendi";
+        public static string FindeksScoreMax = "Findeks skoru 1900 den büyük olamaz";
+        public static string FindeksScoreSuccesful = "Başarılı";
+
+        //User Messages
         public static string UserAdded = "Kullanıcı Eklendi";
         public static string UserDeleted = "Kullanıcı Silindi";
         public static string UserUpdated = "Kullanıcı Güncellendi";
         public static string UsersListed = "Kullanıcılar Listelendi";
         public static string UserListed = "Kullanıcı Listelendi";
-        public static string AuthorizationDenied = "yetki reddedildi";
-        public static string UserRegistered = "kayıt olundu";
-        public static string UserNotFound = "kullanıcı bulunamadı";
-        public static string PasswordError = "parola hatası";
-        public static string UserAlreadyExists = "kullanıcı zaten var";
-        public static string SuccessfulLogin = "başarılı giriş";
-        public static string AccessTokenCreated = "token oluşturuldu";
-        public static string UnknownError = "beklenmedik bir hata oluştu,Lütfen sonra tekrar deneyiniz";
-
-
-        //RentalMessages
-        public static string RentalAdded = "Kiralama işlemi başarılı";
-        public static string RentalAddedError = "Aracın kiraya verilebilmesi için önce teslim edilmesi gerekir.";
-        public static string RentalDeleted = "Kiralama bilgisi silindi";
-        public static string RentalUpdated = "Kiralama bilgisi güncellendi";
-        public static string RentalUpdatedReturnDate = "Araç Teslim Alındı.";
-        public static string RentalUpdatedReturnDateError = "Araç Zaten Teslim Alınmış.";
 
         //CarImage Messages
         public static string CarImageLimit = "Bir arabaya beşten fazla resim eklenemez";
@@ -61,5 +67,34 @@ namespace Business.Constants
         public static string CarImageUpdated = "Resim güncellendi";
         public static string CarImageAdded = "Resim eklendi";
 
+        //Process Messages
+        public static string AuthorizationDenied = "Yetkiniz yok";
+        public static string UserRegistered = "Kayıt oldu";
+        public static string UserNotFound = "Kullanıcı bulunamadı";
+        public static string PasswordError = "Parola hatası";
+        public static string SuccessfulLogin = "Başarılı Giriş";
+        public static string UserAlreadyExists = "Kullanıcı mevcut";
+        public static string AccessTokenCreated = "Token oluşturuldu";
+
+        //Payment
+        public static string ThisCardIsAlreadyRegisteredForThisCustomer = "Bu kart zaten geçerli müşteriye kayıtlı.";
+        public static string PaymentSuccessful = "Ödeme başarılı.";
+        public static string PaymentDenied = "Ödeme bilgileri reddedildi.";
+        public static string CardNumberMustConsistOfLettersOnly = "Kart numarası sadece rakamlardan oluşmalıdır.";
+        public static string LastTwoDigitsOfYearMustBeEntered = "Yılın son iki hanesini giriniz.";
+
+        //Findeks
+        public static string FindeksAdded = "Findeks eklendi";
+        public static string FindeksDeleted = "Findeks güncellendi";
+        public static string FindeksUpdated = "Findeks silindi";
+
+        //CarFindeks
+        public static string CarFindeksAdded = "Araba findeks eklendi";
+        public static string CarFindeksDeleted = "Araba findeks silindi";
+        public static string CarFindeksUpdated = "Araba findeks güncellendi";
+
+        //Contact
+        public static string messagesent = "İleti gönderildi";
+        internal static string messageslisted = "İletiler listelendi";
     }
 }

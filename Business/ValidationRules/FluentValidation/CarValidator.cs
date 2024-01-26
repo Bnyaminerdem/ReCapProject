@@ -12,9 +12,10 @@ namespace Business.ValidationRules.FluentValidation
     {
         public CarValidator() 
         {
-            RuleFor(x => x.Name).MinimumLength(2).WithMessage("Araç adı en az 2 karakter uzunluğunda olmalıdır.");
-            RuleFor(x => x.ModelYear).GreaterThan(0).WithMessage("Aracın model yılı 0'dan büyük olmalıdır.");
-            RuleFor(x=>x.DailyPrice).GreaterThan(0).WithMessage("Aracın günlük fiyatı 0'dan büyük olmalıdır.");
+            RuleFor(c => c.CarName).NotEmpty();
+            RuleFor(c => c.CarName).MinimumLength(2);
+            RuleFor(c => c.DailyPrice).NotEmpty();
+            RuleFor(c => c.DailyPrice).GreaterThan(1500);
         }
     }
 }
