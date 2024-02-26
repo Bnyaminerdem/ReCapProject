@@ -24,20 +24,17 @@ namespace Business.Concrete
     public class CarManager : ICarService
     {
         ICarDal _carDal;
-        ICarImageService _carImageService;      
+   
 
-        public CarManager(ICarDal carDal, ICarImageService carImageService)
+        public CarManager(ICarDal carDal)
         {
             _carDal = carDal;
-            _carImageService = carImageService;
-
         }
        
         [ValidationAspect(typeof(CarValidator))]
         [CacheRemoveAspect("ICarService.Get")]
         public IResult Add(Car car)
-        {
-            //Business codes
+        { 
             _carDal.Add(car);
             return new SuccessResult(Messages.CarAdded);
         }
