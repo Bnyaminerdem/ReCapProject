@@ -14,10 +14,10 @@ namespace Business.Abstract
     {
         IDataResult<List<Car>> GetAll();
         IDataResult<Car> GetById(int carId);
-        IDataResult<List<Car>> GetCarsByBrandId(int brandId);
-        IDataResult<List<Car>> GetCarsByColorId(int colorId);
+        IDataResult<List<Car>> GetCarDetailsByBrandId(int brandId);
+        IDataResult<List<Car>> GetCarDetailsByColorId(int colorId);
         IDataResult<List<CarDetailDto>> GetCarDetails();
-        IDataResult<List<CarDetailDto>> GetCarDetailsId(int carId);
+        IDataResult<List<CarDetailDto>> GetCarDetailsById(int carId);
         IDataResult<List<CarDetailDto>> GetCarsByBrandIdWithDetails(int brandId);
         IDataResult<List<CarDetailDto>> GetCarsByColorIdWithDetails(int colorId);
         IDataResult<List<CarDetailDto>> GetCarByBrandAndColor(int brandId, int colorId);

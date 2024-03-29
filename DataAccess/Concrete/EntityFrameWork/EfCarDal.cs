@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Core.DataAccess.EntityFramework;
 using Entities.DTOs;
+using Umbraco.Core;
 
 namespace DataAccess.Concrete.EntityFrameWork
 {
@@ -34,8 +35,8 @@ namespace DataAccess.Concrete.EntityFrameWork
                                  Description = c.Description,
                                  ModelYear = c.ModelYear,
                                  BrandId = c.BrandId,
-                                 ColorId = c.ColorId,                               
-                                 ImagePath = (from ci in context.CarImages where c.CarId == ci.CarId select ci.ImagePath).FirstOrDefault()!
+                                 ColorId = c.ColorId,
+                                 CarImage = (from ci in context.CarImages where c.CarId == ci.CarId select ci).ToArray()!
                              };
                 return result.ToList();
             }
@@ -56,12 +57,12 @@ namespace DataAccess.Concrete.EntityFrameWork
                                  BrandId = c.BrandId,
                                  BrandName = b.BrandName,
                                  ColorId = c.ColorId,
-                                 ColorName = co.ColorName,                                
+                                 ColorName = co.ColorName,
                                  CarName = c.CarName,
                                  DailyPrice = c.DailyPrice,
                                  Description = c.Description,
                                  ModelYear = c.ModelYear,
-                                 ImagePath = (from ci in context.CarImages where c.CarId == ci.CarId select ci.ImagePath).FirstOrDefault()!
+                                 CarImage = (from ci in context.CarImages where c.CarId == ci.CarId select ci).ToArray()!
                              };
                 return filter == null
                 ? result.ToList()
