@@ -66,6 +66,7 @@ namespace Business.Constants
         public static string CarImageDeleted = "Resim silindi";
         public static string CarImageUpdated = "Resim güncellendi";
         public static string CarImageAdded = "Resim eklendi";
+        public static string CarImageNotFounded = "Resim Bulunamadı";
 
         //Process Messages
         public static string AuthorizationDenied = "Yetkiniz yok";
@@ -83,18 +84,5 @@ namespace Business.Constants
         public static string CardNumberMustConsistOfLettersOnly = "Kart numarası sadece rakamlardan oluşmalıdır.";
         public static string LastTwoDigitsOfYearMustBeEntered = "Yılın son iki hanesini giriniz.";
 
-        //Findeks
-        public static string FindeksAdded = "Findeks eklendi";
-        public static string FindeksDeleted = "Findeks güncellendi";
-        public static string FindeksUpdated = "Findeks silindi";
-
-        //CarFindeks
-        public static string CarFindeksAdded = "Araba findeks eklendi";
-        public static string CarFindeksDeleted = "Araba findeks silindi";
-        public static string CarFindeksUpdated = "Araba findeks güncellendi";
-
-        //Contact
-        public static string messagesent = "İleti gönderildi";
-        internal static string messageslisted = "İletiler listelendi";
     }
 }

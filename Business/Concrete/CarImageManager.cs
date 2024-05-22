@@ -36,9 +36,13 @@ namespace Business.Concrete
 
         public IResult Delete(CarImage carImage)
         {
-            _fileHelper.Delete(PathConstants.ImagePath + carImage.ImagePath);
-            _carImageDal.Delete(carImage);
-            return new SuccessResult(Messages.CarImageDeleted);
+            if (carImage != null && carImage.ImagePath != null)
+            {
+                _fileHelper.Delete(PathConstants.ImagePath + carImage.ImagePath);
+                _carImageDal.Delete(carImage);
+                return new SuccessResult(Messages.CarImageDeleted);
+            }
+            return new ErrorResult(Messages.CarImageNotFounded);
         }
         public IResult Update(IFormFile file, CarImage carImage)
         {
